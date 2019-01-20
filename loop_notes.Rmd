@@ -1,0 +1,37 @@
+---
+title: "Using loops in coding"
+author: "Brad Duthie"
+date: "23 January 2019"
+output: html_document
+---
+
+Contents
+================================================================================
+
+********************************************************************************
+
+**Note: Please think of this document as a living document, which you are free to improve (like a [wiki](https://en.wikipedia.org/wiki/Wiki)) with minor edits, new sections that others might find useful, or [additional resources](#whatelse) that you find that you think others might also find useful. After reading through this, you should have a working understanding of what a loop is and how to use it in your own coding.**
+
+********************************************************************************
+
+- [Introduction: What is a loop?](#what_is_loop)
+
+
+- [Additional resources](#whatelse)
+
+********************************************************************************
+
+<a name="what_is_vc">Introduction: What is a loop?</a>
+================================================================================
+
+
+
+
+<a name="whatelse">Additional resources</a>
+================================================================================
+
+
+
+
+
+
