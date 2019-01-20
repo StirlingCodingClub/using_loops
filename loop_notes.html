@@ -133,6 +133,8 @@ $(document).ready(function () {
 <hr />
 <ul>
 <li><a href="#what_is_loop">Introduction: What is a loop?</a></li>
+<li><a href="#for_gs">The for loop in R: getting started</a></li>
+<li><a href="#for_re">The for loop in R: a real example</a></li>
 </ul>
 <p><strong>Indices in loops</strong></p>
 <p><strong>For loops</strong></p>
@@ -144,18 +146,18 @@ $(document).ready(function () {
 <hr />
 </div>
 <div id="introduction-what-is-a-loop" class="section level1">
-<h1><a name="what_is_vc">Introduction: What is a loop?</a></h1>
-<p>Being able to use loops is a critical skill in programming and working with large arrays of data. Loops allow you to repeat a set of instructions (i.e., code) <code>for</code> a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or <code>while</code> a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of <a href="https://en.wikipedia.org/wiki/For_loop">for loops</a> and <a href="https://en.wikipedia.org/wiki/While_loop">while loops</a> are fundamental for writing and running code efficiently (note that <a href="https://en.wikipedia.org/wiki/Do_while_loop">other types</a> of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.</p>
-<p>The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply">apply</a> and <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply">tapply</a>, which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable <a href="https://cran.r-project.org/">packages</a> (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., <a href="https://github.com/vegandevs/vegan">vegan</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a>, and <a href="https://github.com/rstudio/shiny">shiny</a>). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will allow you to quickly and confidently develop reproducible code in your own data analysis, ultimately saving time while also further developing your own coding skills.</p>
+<h1><a name="what_is_loop">Introduction: What is a loop?</a></h1>
+<p>Being able to use loops is a critical skill in programming and working with large arrays of data. Loops make it possible to repeat a set of instructions (i.e., code) <code>for</code> a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or <code>while</code> a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of <a href="https://en.wikipedia.org/wiki/For_loop">for loops</a> and <a href="https://en.wikipedia.org/wiki/While_loop">while loops</a> are fundamental for writing and running code efficiently (note that <a href="https://en.wikipedia.org/wiki/Do_while_loop">other types</a> of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.</p>
+<p>The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply">apply</a> and <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply">tapply</a>, which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable <a href="https://cran.r-project.org/">packages</a> (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., <a href="https://github.com/vegandevs/vegan">vegan</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a>, and <a href="https://github.com/rstudio/shiny">shiny</a>). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will make it possible to quickly and confidently develop reproducible code in data analysis. In the long term, this will likely save time; in the short term, it creates an opportunity to develop and practice coding skills.</p>
 <p>Below I will demonstrate how to use <a href="https://en.wikipedia.org/wiki/For_loop">for loops</a> and <a href="https://en.wikipedia.org/wiki/While_loop">while loops</a>.</p>
 <ul>
 <li>A <strong>for loop</strong> iterates a set of instructions <em>for</em> a predetermined set of conditions (i.e., when you know how many times you need to iterate the same set of instructions)</li>
 <li>A <strong>while loop</strong> iterates a set of instructions <em>while</em> some condition(s) remains satisfied (i.e., when you might not know how many times you need to iterate the same set of instructions, but you do know when the iterations need to stop)</li>
 </ul>
-<p>It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of ‘multiplication’ before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.</p>
+<p>It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of ‘multiplication’ before learning to multiply two numbers. Seeing examples of loops in practice will make it clear how they work and when to use them. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.</p>
 </div>
 <div id="the-for-loop-in-r-getting-started" class="section level1">
-<h1>The for loop in R: getting started</h1>
+<h1><a name="for_gs">The for loop in R: getting started</a></h1>
 <p>Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:</p>
 <pre class="r"><code>for(index in set_of_conditions){
   # Code that gets repeated for each condition
@@ -166,7 +168,7 @@ $(document).ready(function () {
 }</code></pre>
 <p>We can interpret the line <code>for(i in 1:10)</code> verbally to explain what is going on in plain English:</p>
 <blockquote>
-<p>Substitute the index <code>i</code> for each value from 1 to 10 (i.e., 1, 2, 3, …, 8, 9, 10), then run the following bracketed code in sequence. In other words, run the bracketed code first with <code>i = 1</code>, then with <code>i = 2</code>, and so forth until finishing the loop with <code>i = 10</code>.</p>
+<p>Substitute the index <code>i</code> for each value from 1 to 10 (i.e., 1, 2, 3, …, 8, 9, 10), and run the following bracketed code with each value in sequence. In other words, run the bracketed code first with <code>i = 1</code>, then with <code>i = 2</code>, and so forth until finishing the loop with <code>i = 10</code>.</p>
 </blockquote>
 <p>Given the above explanation, we can predict what will happen with the example code above, which I now run below.</p>
 <pre class="r"><code>for(i in 1:10){
@@ -204,7 +206,7 @@ print(10);</code></pre>
 ## [1] 8
 ## [1] 9
 ## [1] 10</code></pre>
-<p>In the above, I have <a href="https://en.wikipedia.org/wiki/Loop_unrolling">unrolled</a> the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat code more times than necessary (consider if you decided you wanted to print values from 1 to 10000 – much less needs to be changed when using the for loop, and much less code needs to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what your loops would look like if unrolled – or even write them both ways to convince yourself that the loop is doing what you intend it to do.</p>
+<p>In the above, I have <a href="https://en.wikipedia.org/wiki/Loop_unrolling">unrolled</a> the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat the same code more times than is necessary (consider if we wanted to print values from 1 to 10000 – much less needs to be changed when using the for loop, and much fewer lines of code need to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what the loops would look like if unrolled – or even write them both ways to confirm that a loop is working as intended.</p>
 <p><strong>2. There is nothing special about <code>i</code></strong></p>
 <p>In a lot of books and online examples introducing loops, the index <code>i</code> is used as it is in my above example. But there is nothing special about <code>i</code>, just as there is nothing special about the variable <code>x</code> in algebra. The index <code>i</code> just serves as a placeholder for whatever actual value is going to be substituted from the set of conditions (i.e., values from 1 to 10 in the above example). We get the exact same result with the following code:</p>
 <pre class="r"><code>for(value_to_be_printed in 1:10){
@@ -220,7 +222,7 @@ print(10);</code></pre>
 ## [1] 8
 ## [1] 9
 ## [1] 10</code></pre>
-<p>The above use of the long <code>value_to_be_printed</code> instead of the shorter <code>i</code> seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting <code>{</code> and ending <code>}</code> brackets becomes larger than can be viewed on your screen.</p>
+<p>The above use of the long <code>value_to_be_printed</code> instead of the shorter <code>i</code> seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting <code>{</code> and ending <code>}</code> brackets becomes larger than can be viewed on a computer screen.</p>
 <p><strong>3. There is nothing special about <code>1:10</code></strong></p>
 <p>A lot of introductions to for loops in R will show the set of values to be iterated in this way, but there are equally acceptable ways to write it. For example, consider the below:</p>
 <pre class="r"><code>for(i in c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)){
@@ -270,23 +272,23 @@ for(i in the_set){
 for(i in random_vec){
   print(i);
 }</code></pre>
-<pre><code>## [1] 4
-## [1] 7
-## [1] 10
-## [1] 5
+<pre><code>## [1] 6
 ## [1] 2
-## [1] 9
+## [1] 7
 ## [1] 1
+## [1] 5
 ## [1] 3
+## [1] 10
 ## [1] 8
-## [1] 6</code></pre>
-<p>It is unlikely that there would ever be a need to reverse the order of a set, and for most of the for loops that you write, the simple <code>1:N</code> format will usually be all that you need. The point is that you should not feel <em>constrained</em> to using this format when writing loops.</p>
+## [1] 4
+## [1] 9</code></pre>
+<p>It is unlikely that there would ever be a need to reverse the order of a set, and for most for loops, the simple <code>1:N</code> format will usually be all that that is needed. The point is that there is no reason to feel <em>constrained</em> to using this format when writing loops.</p>
 </div>
 <div id="the-for-loop-in-r-a-real-example" class="section level1">
-<h1>The for loop in R: a real example</h1>
-<p>The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In real coding, it is unlikely that you will use for loops to print off values, and much more likely that you will use for loops to repeat the same set of instructions for a set of values. As a real example, I will use use the <code>nhtemp</code> data set in R.</p>
+<h1><a name="for_re">The for loop in R: a real example</a></h1>
+<p>The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In coding, there is rarely such a need to use for loops to simply print off values. More often, for loops are used to repeat the same set of (often complex) instructions for a set of values. As a real example, I will use use the <code>nhtemp</code> data set in R.</p>
 <pre class="r"><code>data(nhtemp); # Reads in the data set</code></pre>
-<p>The <code>nhtemp</code> data set is a vector with the mean annual temperature in degrees Fahrenheit in New Haven, Connecticut (USA), from 1912 to 1971.</p>
+<p>The <code>nhtemp</code> data set includes a vector that stores the mean annual temperature in degrees Fahrenheit in <a href="https://www.google.com/maps/place/New+Haven,+CT,+USA/@40.5046762,-74.5979605,6.75z/data=!4m5!3m4!1s0x89e7d8443a8070e5:0xf6a354c659b264ed!8m2!3d41.308274!4d-72.9278835">New Haven</a>, Connecticut (USA), from 1912 to 1971.</p>
 <pre class="r"><code>print(nhtemp);</code></pre>
 <pre><code>## Time Series:
 ## Start = 1912 
@@ -298,6 +300,465 @@ for(i in random_vec){
 ## [43] 52.0 52.0 50.9 52.6 50.2 52.6 51.6 51.9 50.5 50.9 51.7 51.4 51.7 50.8
 ## [57] 51.9 51.8 51.9 53.0</code></pre>
 <p>In the above data, the first value 49.9 is therefore the mean temperature from 1912, and the last value 53 is the mean temperature from 1971. We can print these off by using the indices <code>nhtemp[1]</code> and <code>nhtemp[60]</code> (as there are <code>length(nhtemp)</code> = 60 temperature years in <code>nhtemp</code>).</p>
+<pre class="r"><code>print(nhtemp[1]);</code></pre>
+<pre><code>## [1] 49.9</code></pre>
+<pre class="r"><code>print(nhtemp[60]);</code></pre>
+<pre><code>## [1] 53</code></pre>
+<p>We might want to use these data to analyse how the temperature in New Haven has changed over the years from 1912-1972. The first task would likely be to convert the temperatures from Fahrenheit to Celsius. The formula for conversion is as follows,</p>
+<p><span class="math display">\[T_{Celsius} = \frac{5}{9}(T_{Fahrenheit} - 32).\]</span></p>
+<p>To get <span class="math inline">\(T_{Celsius}\)</span>, it is not actually necessary to use a for loop in R; this can be done in one line of code:</p>
+<pre class="r"><code>T_Celsius &lt;- (5/9) * (nhtemp - 32);
+print(T_Celsius);</code></pre>
+<pre><code>## Time Series:
+## Start = 1912 
+## End = 1971 
+## Frequency = 1 
+##  [1]  9.944444 11.277778  9.666667 10.611111  9.666667  8.833333  9.888889
+##  [8] 10.500000  9.611111 11.055556 10.444444  9.777778  9.611111 10.333333
+## [15]  9.111111 10.388889 10.500000 10.333333 10.833333 11.555556 11.000000
+## [22] 10.611111  9.888889 10.111111 10.222222 10.888889 11.000000 10.500000
+## [29]  9.333333 10.944444 10.555556 10.333333 10.944444 10.833333 11.166667
+## [36] 10.722222 10.555556 12.222222 10.777778 11.500000 11.722222 12.555556
+## [43] 11.111111 11.111111 10.500000 11.444444 10.111111 11.444444 10.888889
+## [50] 11.055556 10.277778 10.500000 10.944444 10.777778 10.944444 10.444444
+## [57] 11.055556 11.000000 11.055556 11.666667</code></pre>
+<p>But if we know in advance that we will be doing some more complex data manipulation later, in might make sense to start out doing the conversion within a loop instead. To use a loop, we can first define the vector <code>T_Celsius</code>, then apply the conversion for each value in <code>nhtemp</code>.</p>
+<pre class="r"><code>T_Celsius &lt;- NULL;
+for(year in 1:length(nhtemp)){
+  T_Celsius[year] &lt;- (5/9) * (nhtemp[year] - 32);
+}
+print(T_Celsius);</code></pre>
+<pre><code>##  [1]  9.944444 11.277778  9.666667 10.611111  9.666667  8.833333  9.888889
+##  [8] 10.500000  9.611111 11.055556 10.444444  9.777778  9.611111 10.333333
+## [15]  9.111111 10.388889 10.500000 10.333333 10.833333 11.555556 11.000000
+## [22] 10.611111  9.888889 10.111111 10.222222 10.888889 11.000000 10.500000
+## [29]  9.333333 10.944444 10.555556 10.333333 10.944444 10.833333 11.166667
+## [36] 10.722222 10.555556 12.222222 10.777778 11.500000 11.722222 12.555556
+## [43] 11.111111 11.111111 10.500000 11.444444 10.111111 11.444444 10.888889
+## [50] 11.055556 10.277778 10.500000 10.944444 10.777778 10.944444 10.444444
+## [57] 11.055556 11.000000 11.055556 11.666667</code></pre>
+<p>There are a few things to note here.</p>
+<ul>
+<li>In the first line of the above, using the <code>rep</code> function, I have defined <code>T_Celsius</code> to be a null vector.</li>
+<li>I have used the index <code>year</code> rather than <code>i</code> to make it easier to remember what I am looping over.</li>
+<li>The loop goes from 1 to the length of <code>nhtemp</code> (<code>length(nhtemp)</code> = 60). I could have instead just written <code>1:60</code>, but the above has the advantage that if the length of <code>nhtemp</code> changes for some reason, the loop will still work. As a exercise, try running the above code for <code>1:40</code> or <code>1:80</code> to see what happens when the number of years to loop over does not match the number of years in <code>nhtemp</code>.</li>
+</ul>
+<p>Now say that we actually want to know the <em>change</em> in temperature from one year to the next, and to make a new vector <code>Temp_ch</code> that stores the difference in degrees Celsius from <code>year</code> to <code>year - 1</code>. While there are ways to make such a vector in R without a loop, using a for loop is probably most intuitive way to do it.</p>
+<pre class="r"><code>T_Celsius &lt;- NULL;
+Temp_ch   &lt;- NULL;
+for(year in 1:length(nhtemp)){
+  T_Celsius[year] &lt;- (5/9) * (nhtemp[year] - 32);
+  Temp_ch[year]   &lt;- T_Celsius[year] - T_Celsius[year - 1];
+}
+print(T_Celsius);</code></pre>
+<pre><code>##  [1]  9.944444 11.277778  9.666667 10.611111  9.666667  8.833333  9.888889
+##  [8] 10.500000  9.611111 11.055556 10.444444  9.777778  9.611111 10.333333
+## [15]  9.111111 10.388889 10.500000 10.333333 10.833333 11.555556 11.000000
+## [22] 10.611111  9.888889 10.111111 10.222222 10.888889 11.000000 10.500000
+## [29]  9.333333 10.944444 10.555556 10.333333 10.944444 10.833333 11.166667
+## [36] 10.722222 10.555556 12.222222 10.777778 11.500000 11.722222 12.555556
+## [43] 11.111111 11.111111 10.500000 11.444444 10.111111 11.444444 10.888889
+## [50] 11.055556 10.277778 10.500000 10.944444 10.777778 10.944444 10.444444
+## [57] 11.055556 11.000000 11.055556 11.666667</code></pre>
+<p>In the new line of code added within the above loop, the temperature in degrees Celsius from the previous year <code>T_Celsius[year - 1]</code> is subtracted from the tempurature from the current year <code>T_Celsius[year]</code>. The value of this difference is then stored in <code>Temp_ch[year]</code>, so at the end of the loop, each element of <code>Temp_ch</code> stores the difference between the current year’s temperature and the last year’s temperature.</p>
+<p>Note that this newly added line within the for loop is a bit dangerous because <code>T_Celsius[year - 1]</code> does not exist when <code>year = 1</code> (i.e., at the start of the loop). Since there is no value at <code>T_Celsius[1 - 1]</code>, R returns an <code>NA</code>, so the first value of <code>Temp_ch = NA</code>. This is what we want, but if we are not careful, trusting R to fill things in appropriately might cause us problems later. It is usually better to err on the side of caution and think carefully about what each line is doing, using comments to help the readability. The example below makes everything a bit cleaner and clearer.</p>
+<pre class="r"><code>total_years &lt;- length(nhtemp); # Total years in the data set
+# Make vectors with an NA element for each year
+T_Celsius   &lt;- rep(x = NA, times = total_years);
+Temp_ch     &lt;- rep(x = NA, times = total_years);
+for(year in 1:total_years){ # For each year in the data set
+  # First calculate the temperature in degrees Celsius
+  T_Celsius[year] &lt;- (5/9) * (nhtemp[year] - 32);
+  if(year &gt; 1){ # Condition in which difference exists
+      Temp_ch[year] &lt;- T_Celsius[year] - T_Celsius[year - 1];
+  } # Now T_Celsius[0] will not be attempted
+}
+print(T_Celsius);</code></pre>
+<pre><code>##  [1]  9.944444 11.277778  9.666667 10.611111  9.666667  8.833333  9.888889
+##  [8] 10.500000  9.611111 11.055556 10.444444  9.777778  9.611111 10.333333
+## [15]  9.111111 10.388889 10.500000 10.333333 10.833333 11.555556 11.000000
+## [22] 10.611111  9.888889 10.111111 10.222222 10.888889 11.000000 10.500000
+## [29]  9.333333 10.944444 10.555556 10.333333 10.944444 10.833333 11.166667
+## [36] 10.722222 10.555556 12.222222 10.777778 11.500000 11.722222 12.555556
+## [43] 11.111111 11.111111 10.500000 11.444444 10.111111 11.444444 10.888889
+## [50] 11.055556 10.277778 10.500000 10.944444 10.777778 10.944444 10.444444
+## [57] 11.055556 11.000000 11.055556 11.666667</code></pre>
+<p>The use of the <code>if</code> above is technically unnecessary, but it serves as a nice reminder that it only makes sense to take the difference between temperatures starting in year 2. Now with <code>T_Celsius</code> and <code>Temp_ch</code> calculated, we can make a nice table of years and temperature values and changes.</p>
+<pre class="r"><code>years &lt;- 1912:1971;
+dat   &lt;- cbind(years, nhtemp, T_Celsius, Temp_ch);</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">years</th>
+<th align="right">nhtemp</th>
+<th align="right">T_Celsius</th>
+<th align="right">Temp_ch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1912</td>
+<td align="right">49.9</td>
+<td align="right">9.944444</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">1913</td>
+<td align="right">52.3</td>
+<td align="right">11.277778</td>
+<td align="right">1.33333333</td>
+</tr>
+<tr class="odd">
+<td align="right">1914</td>
+<td align="right">49.4</td>
+<td align="right">9.666667</td>
+<td align="right">-1.61111111</td>
+</tr>
+<tr class="even">
+<td align="right">1915</td>
+<td align="right">51.1</td>
+<td align="right">10.611111</td>
+<td align="right">0.94444444</td>
+</tr>
+<tr class="odd">
+<td align="right">1916</td>
+<td align="right">49.4</td>
+<td align="right">9.666667</td>
+<td align="right">-0.94444444</td>
+</tr>
+<tr class="even">
+<td align="right">1917</td>
+<td align="right">47.9</td>
+<td align="right">8.833333</td>
+<td align="right">-0.83333333</td>
+</tr>
+<tr class="odd">
+<td align="right">1918</td>
+<td align="right">49.8</td>
+<td align="right">9.888889</td>
+<td align="right">1.05555556</td>
+</tr>
+<tr class="even">
+<td align="right">1919</td>
+<td align="right">50.9</td>
+<td align="right">10.500000</td>
+<td align="right">0.61111111</td>
+</tr>
+<tr class="odd">
+<td align="right">1920</td>
+<td align="right">49.3</td>
+<td align="right">9.611111</td>
+<td align="right">-0.88888889</td>
+</tr>
+<tr class="even">
+<td align="right">1921</td>
+<td align="right">51.9</td>
+<td align="right">11.055556</td>
+<td align="right">1.44444444</td>
+</tr>
+<tr class="odd">
+<td align="right">1922</td>
+<td align="right">50.8</td>
+<td align="right">10.444444</td>
+<td align="right">-0.61111111</td>
+</tr>
+<tr class="even">
+<td align="right">1923</td>
+<td align="right">49.6</td>
+<td align="right">9.777778</td>
+<td align="right">-0.66666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1924</td>
+<td align="right">49.3</td>
+<td align="right">9.611111</td>
+<td align="right">-0.16666667</td>
+</tr>
+<tr class="even">
+<td align="right">1925</td>
+<td align="right">50.6</td>
+<td align="right">10.333333</td>
+<td align="right">0.72222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1926</td>
+<td align="right">48.4</td>
+<td align="right">9.111111</td>
+<td align="right">-1.22222222</td>
+</tr>
+<tr class="even">
+<td align="right">1927</td>
+<td align="right">50.7</td>
+<td align="right">10.388889</td>
+<td align="right">1.27777778</td>
+</tr>
+<tr class="odd">
+<td align="right">1928</td>
+<td align="right">50.9</td>
+<td align="right">10.500000</td>
+<td align="right">0.11111111</td>
+</tr>
+<tr class="even">
+<td align="right">1929</td>
+<td align="right">50.6</td>
+<td align="right">10.333333</td>
+<td align="right">-0.16666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1930</td>
+<td align="right">51.5</td>
+<td align="right">10.833333</td>
+<td align="right">0.50000000</td>
+</tr>
+<tr class="even">
+<td align="right">1931</td>
+<td align="right">52.8</td>
+<td align="right">11.555556</td>
+<td align="right">0.72222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1932</td>
+<td align="right">51.8</td>
+<td align="right">11.000000</td>
+<td align="right">-0.55555556</td>
+</tr>
+<tr class="even">
+<td align="right">1933</td>
+<td align="right">51.1</td>
+<td align="right">10.611111</td>
+<td align="right">-0.38888889</td>
+</tr>
+<tr class="odd">
+<td align="right">1934</td>
+<td align="right">49.8</td>
+<td align="right">9.888889</td>
+<td align="right">-0.72222222</td>
+</tr>
+<tr class="even">
+<td align="right">1935</td>
+<td align="right">50.2</td>
+<td align="right">10.111111</td>
+<td align="right">0.22222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1936</td>
+<td align="right">50.4</td>
+<td align="right">10.222222</td>
+<td align="right">0.11111111</td>
+</tr>
+<tr class="even">
+<td align="right">1937</td>
+<td align="right">51.6</td>
+<td align="right">10.888889</td>
+<td align="right">0.66666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1938</td>
+<td align="right">51.8</td>
+<td align="right">11.000000</td>
+<td align="right">0.11111111</td>
+</tr>
+<tr class="even">
+<td align="right">1939</td>
+<td align="right">50.9</td>
+<td align="right">10.500000</td>
+<td align="right">-0.50000000</td>
+</tr>
+<tr class="odd">
+<td align="right">1940</td>
+<td align="right">48.8</td>
+<td align="right">9.333333</td>
+<td align="right">-1.16666667</td>
+</tr>
+<tr class="even">
+<td align="right">1941</td>
+<td align="right">51.7</td>
+<td align="right">10.944444</td>
+<td align="right">1.61111111</td>
+</tr>
+<tr class="odd">
+<td align="right">1942</td>
+<td align="right">51.0</td>
+<td align="right">10.555556</td>
+<td align="right">-0.38888889</td>
+</tr>
+<tr class="even">
+<td align="right">1943</td>
+<td align="right">50.6</td>
+<td align="right">10.333333</td>
+<td align="right">-0.22222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1944</td>
+<td align="right">51.7</td>
+<td align="right">10.944444</td>
+<td align="right">0.61111111</td>
+</tr>
+<tr class="even">
+<td align="right">1945</td>
+<td align="right">51.5</td>
+<td align="right">10.833333</td>
+<td align="right">-0.11111111</td>
+</tr>
+<tr class="odd">
+<td align="right">1946</td>
+<td align="right">52.1</td>
+<td align="right">11.166667</td>
+<td align="right">0.33333333</td>
+</tr>
+<tr class="even">
+<td align="right">1947</td>
+<td align="right">51.3</td>
+<td align="right">10.722222</td>
+<td align="right">-0.44444444</td>
+</tr>
+<tr class="odd">
+<td align="right">1948</td>
+<td align="right">51.0</td>
+<td align="right">10.555556</td>
+<td align="right">-0.16666667</td>
+</tr>
+<tr class="even">
+<td align="right">1949</td>
+<td align="right">54.0</td>
+<td align="right">12.222222</td>
+<td align="right">1.66666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1950</td>
+<td align="right">51.4</td>
+<td align="right">10.777778</td>
+<td align="right">-1.44444444</td>
+</tr>
+<tr class="even">
+<td align="right">1951</td>
+<td align="right">52.7</td>
+<td align="right">11.500000</td>
+<td align="right">0.72222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1952</td>
+<td align="right">53.1</td>
+<td align="right">11.722222</td>
+<td align="right">0.22222222</td>
+</tr>
+<tr class="even">
+<td align="right">1953</td>
+<td align="right">54.6</td>
+<td align="right">12.555556</td>
+<td align="right">0.83333333</td>
+</tr>
+<tr class="odd">
+<td align="right">1954</td>
+<td align="right">52.0</td>
+<td align="right">11.111111</td>
+<td align="right">-1.44444444</td>
+</tr>
+<tr class="even">
+<td align="right">1955</td>
+<td align="right">52.0</td>
+<td align="right">11.111111</td>
+<td align="right">0.00000000</td>
+</tr>
+<tr class="odd">
+<td align="right">1956</td>
+<td align="right">50.9</td>
+<td align="right">10.500000</td>
+<td align="right">-0.61111111</td>
+</tr>
+<tr class="even">
+<td align="right">1957</td>
+<td align="right">52.6</td>
+<td align="right">11.444444</td>
+<td align="right">0.94444444</td>
+</tr>
+<tr class="odd">
+<td align="right">1958</td>
+<td align="right">50.2</td>
+<td align="right">10.111111</td>
+<td align="right">-1.33333333</td>
+</tr>
+<tr class="even">
+<td align="right">1959</td>
+<td align="right">52.6</td>
+<td align="right">11.444444</td>
+<td align="right">1.33333333</td>
+</tr>
+<tr class="odd">
+<td align="right">1960</td>
+<td align="right">51.6</td>
+<td align="right">10.888889</td>
+<td align="right">-0.55555556</td>
+</tr>
+<tr class="even">
+<td align="right">1961</td>
+<td align="right">51.9</td>
+<td align="right">11.055556</td>
+<td align="right">0.16666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1962</td>
+<td align="right">50.5</td>
+<td align="right">10.277778</td>
+<td align="right">-0.77777778</td>
+</tr>
+<tr class="even">
+<td align="right">1963</td>
+<td align="right">50.9</td>
+<td align="right">10.500000</td>
+<td align="right">0.22222222</td>
+</tr>
+<tr class="odd">
+<td align="right">1964</td>
+<td align="right">51.7</td>
+<td align="right">10.944444</td>
+<td align="right">0.44444444</td>
+</tr>
+<tr class="even">
+<td align="right">1965</td>
+<td align="right">51.4</td>
+<td align="right">10.777778</td>
+<td align="right">-0.16666667</td>
+</tr>
+<tr class="odd">
+<td align="right">1966</td>
+<td align="right">51.7</td>
+<td align="right">10.944444</td>
+<td align="right">0.16666667</td>
+</tr>
+<tr class="even">
+<td align="right">1967</td>
+<td align="right">50.8</td>
+<td align="right">10.444444</td>
+<td align="right">-0.50000000</td>
+</tr>
+<tr class="odd">
+<td align="right">1968</td>
+<td align="right">51.9</td>
+<td align="right">11.055556</td>
+<td align="right">0.61111111</td>
+</tr>
+<tr class="even">
+<td align="right">1969</td>
+<td align="right">51.8</td>
+<td align="right">11.000000</td>
+<td align="right">-0.05555556</td>
+</tr>
+<tr class="odd">
+<td align="right">1970</td>
+<td align="right">51.9</td>
+<td align="right">11.055556</td>
+<td align="right">0.05555556</td>
+</tr>
+<tr class="even">
+<td align="right">1971</td>
+<td align="right">53.0</td>
+<td align="right">11.666667</td>
+<td align="right">0.61111111</td>
+</tr>
+</tbody>
+</table>
+<p>In the next section, I will move on to consider a more complicated example using nested for loops (i.e., a for loop inside of another for loop).</p>
 </div>
 <div id="additional-resources" class="section level1">
 <h1><a name="whatelse">Additional resources</a></h1>

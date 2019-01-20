@@ -15,6 +15,8 @@ Contents
 ********************************************************************************
 
 - [Introduction: What is a loop?](#what_is_loop)
+- [The for loop in R: getting started](#for_gs)
+- [The for loop in R: a real example](#for_re)
 
 **Indices in loops**
 
@@ -29,21 +31,21 @@ Infinite loop
 
 ********************************************************************************
 
-<a name="what_is_vc">Introduction: What is a loop?</a>
+<a name="what_is_loop">Introduction: What is a loop?</a>
 ================================================================================
 
-Being able to use loops is a critical skill in programming and working with large arrays of data. Loops allow you to repeat a set of instructions (i.e., code) `for` a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or `while` a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of [for loops](https://en.wikipedia.org/wiki/For_loop) and [while loops](https://en.wikipedia.org/wiki/While_loop) are fundamental for writing and running code efficiently (note that [other types](https://en.wikipedia.org/wiki/Do_while_loop) of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.
+Being able to use loops is a critical skill in programming and working with large arrays of data. Loops make it possible to repeat a set of instructions (i.e., code) `for` a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or `while` a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of [for loops](https://en.wikipedia.org/wiki/For_loop) and [while loops](https://en.wikipedia.org/wiki/While_loop) are fundamental for writing and running code efficiently (note that [other types](https://en.wikipedia.org/wiki/Do_while_loop) of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.
 
-The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as [apply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply) and [tapply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply), which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable [packages](https://cran.r-project.org/) (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., [vegan](https://github.com/vegandevs/vegan), [dplyr](https://dplyr.tidyverse.org/), and [shiny](https://github.com/rstudio/shiny)). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will allow you to quickly and confidently develop reproducible code in your own data analysis, ultimately saving time while also further developing your own coding skills.
+The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as [apply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply) and [tapply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply), which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable [packages](https://cran.r-project.org/) (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., [vegan](https://github.com/vegandevs/vegan), [dplyr](https://dplyr.tidyverse.org/), and [shiny](https://github.com/rstudio/shiny)). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will make it possible to quickly and confidently develop reproducible code in data analysis. In the long term, this will likely save time; in the short term, it creates an opportunity to develop and practice coding skills.
 
 Below I will demonstrate how to use [for loops](https://en.wikipedia.org/wiki/For_loop) and [while loops](https://en.wikipedia.org/wiki/While_loop).
 
 - A **for loop** iterates a set of instructions *for* a predetermined set of conditions (i.e., when you know how many times you need to iterate the same set of instructions)
 - A **while loop** iterates a set of instructions *while* some condition(s) remains satisfied (i.e., when you might not know how many times you need to iterate the same set of instructions, but you do know when the iterations need to stop)
 
-It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of 'multiplication' before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.
+It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of 'multiplication' before learning to multiply two numbers. Seeing examples of loops in practice will make it clear how they work and when to use them. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.
 
-The for loop in R: getting started
+<a name="for_gs">The for loop in R: getting started</a>
 ================================================================================
 
 Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:
@@ -64,7 +66,7 @@ for(i in 1:10){
 
 We can interpret the line `for(i in 1:10)` verbally to explain what is going on in plain English:
 
-> Substitute the index `i` for each value from 1 to 10 (i.e., 1, 2, 3, ..., 8, 9, 10), then run the following bracketed code in sequence. In other words, run the bracketed code first with `i = 1`, then with `i = 2`, and so forth until finishing the loop with `i = 10`. 
+> Substitute the index `i` for each value from 1 to 10 (i.e., 1, 2, 3, ..., 8, 9, 10), and run the following bracketed code with each value in sequence. In other words, run the bracketed code first with `i = 1`, then with `i = 2`, and so forth until finishing the loop with `i = 10`. 
 
 Given the above explanation, we can predict what will happen with the example code above, which I now run below.
 
@@ -97,7 +99,7 @@ for(i in 1:10){
 }
 ```
 
-In the above, I have [unrolled](https://en.wikipedia.org/wiki/Loop_unrolling) the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat code more times than necessary (consider if you decided you wanted to print values from 1 to 10000 -- much less needs to be changed when using the for loop, and much less code needs to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what your loops would look like if unrolled -- or even write them both ways to convince yourself that the loop is doing what you intend it to do.
+In the above, I have [unrolled](https://en.wikipedia.org/wiki/Loop_unrolling) the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat the same code more times than is necessary (consider if we wanted to print values from 1 to 10000 -- much less needs to be changed when using the for loop, and much fewer lines of code need to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what the loops would look like if unrolled -- or even write them both ways to confirm that a loop is working as intended.
 
 **2. There is nothing special about `i`**
 
@@ -109,7 +111,7 @@ for(value_to_be_printed in 1:10){
 }
 ```
 
-The above use of the long `value_to_be_printed` instead of the shorter `i` seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting `{` and ending `}` brackets becomes larger than can be viewed on your screen.
+The above use of the long `value_to_be_printed` instead of the shorter `i` seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting `{` and ending `}` brackets becomes larger than can be viewed on a computer screen.
 
 **3. There is nothing special about `1:10`**
 
@@ -147,18 +149,18 @@ for(i in random_vec){
 }
 ```
 
-It is unlikely that there would ever be a need to reverse the order of a set, and for most of the for loops that you write, the simple `1:N` format will usually be all that you need. The point is that you should not feel *constrained* to using this format when writing loops.
+It is unlikely that there would ever be a need to reverse the order of a set, and for most for loops, the simple `1:N` format will usually be all that that is needed. The point is that there is no reason to feel *constrained* to using this format when writing loops.
 
-The for loop in R: a real example
+<a name="for_re">The for loop in R: a real example</a>
 ================================================================================
 
-The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In real coding, it is unlikely that you will use for loops to print off values, and much more likely that you will use for loops to repeat the same set of instructions for a set of values. As a real example, I will use use the `nhtemp` data set in R.
+The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In coding, there is rarely such a need to use for loops to simply print off values. More often, for loops are used to repeat the same set of (often complex) instructions for a set of values. As a real example, I will use use the `nhtemp` data set in R.
 
 ```{r}
 data(nhtemp); # Reads in the data set
 ```
 
-The `nhtemp` data set is a vector with the mean annual temperature in degrees Fahrenheit in [New Haven](https://www.google.com/maps/place/New+Haven,+CT,+USA/@40.5046762,-74.5979605,6.75z/data=!4m5!3m4!1s0x89e7d8443a8070e5:0xf6a354c659b264ed!8m2!3d41.308274!4d-72.9278835), Connecticut (USA), from 1912 to 1971.
+The `nhtemp` data set includes a vector that stores the mean annual temperature in degrees Fahrenheit in [New Haven](https://www.google.com/maps/place/New+Haven,+CT,+USA/@40.5046762,-74.5979605,6.75z/data=!4m5!3m4!1s0x89e7d8443a8070e5:0xf6a354c659b264ed!8m2!3d41.308274!4d-72.9278835), Connecticut (USA), from 1912 to 1971.
 
 ```{r}
 print(nhtemp);
@@ -171,24 +173,25 @@ print(nhtemp[1]);
 print(nhtemp[60]);
 ```
 
-Pretend for a moment that you want to use these data to analyse how the temperature in New Haven has changed over the years from 1912-1972. The first thing that you might want to do is to convert the temperatures given Fahrenheit to Celsius. The formula for conversion is as follows,
+We might want to use these data to analyse how the temperature in New Haven has changed over the years from 1912-1972. The first task would likely be to convert the temperatures from Fahrenheit to Celsius. The formula for conversion is as follows,
 
 $$T_{Celsius} = \frac{5}{9}(T_{Fahrenheit} - 32).$$
 
-To get $T_{Celsius}$, it is not actually necessary to use a for loop in R; you can actually do it with the following line of code:
+To get $T_{Celsius}$, it is not actually necessary to use a for loop in R; this can be done in one line of code:
 
 ```{r}
 T_Celsius <- (5/9) * (nhtemp - 32);
 print(T_Celsius);
 ```
 
-But if you know in advance that you will doing some more complex data manipulation later, in might make sense to start out doing the same with a loop instead. To use a loop, you can first define the vector `T_Celsius`, then apply the conversion for each value in `nhtemp`.
+But if we know in advance that we will be doing some more complex data manipulation later, in might make sense to start out doing the conversion within a loop instead. To use a loop, we can first define the vector `T_Celsius`, then apply the conversion for each value in `nhtemp`.
 
 ```{r}
 T_Celsius <- NULL;
 for(year in 1:length(nhtemp)){
   T_Celsius[year] <- (5/9) * (nhtemp[year] - 32);
 }
+print(T_Celsius);
 ```
 
 There are a few things to note here.
@@ -197,7 +200,50 @@ There are a few things to note here.
 - I have used the index `year` rather than `i` to make it easier to remember what I am looping over.
 - The loop goes from 1 to the length of `nhtemp` (`length(nhtemp)` = `r length(nhtemp)`). I could have instead just written `1:60`, but the above has the advantage that if the length of `nhtemp` changes for some reason, the loop will still work. As a exercise, try running the above code for `1:40` or `1:80` to see what happens when the number of years to loop over does not match the number of years in `nhtemp`.
 
+Now say that we actually want to know the *change* in temperature from one year to the next, and to make a new vector `Temp_ch` that stores the difference in degrees Celsius from `year` to `year - 1`. While there are ways to make such a vector in R without a loop, using a for loop is probably most intuitive way to do it.
 
+```{r}
+T_Celsius <- NULL;
+Temp_ch   <- NULL;
+for(year in 1:length(nhtemp)){
+  T_Celsius[year] <- (5/9) * (nhtemp[year] - 32);
+  Temp_ch[year]   <- T_Celsius[year] - T_Celsius[year - 1];
+}
+print(T_Celsius);
+```
+
+In the new line of code added within the above loop, the temperature in degrees Celsius from the previous year `T_Celsius[year - 1]` is subtracted from the tempurature from the current year `T_Celsius[year]`. The value of this difference is then stored in `Temp_ch[year]`, so at the end of the loop, each element of `Temp_ch` stores the difference between the current year's temperature and the last year's temperature.
+
+Note that this newly added line within the for loop is a bit dangerous because `T_Celsius[year - 1]` does not exist when `year = 1` (i.e., at the start of the loop). Since there is no value at `T_Celsius[1 - 1]`, R returns an `NA`, so the first value of `Temp_ch = NA`. This is what we want, but if we are not careful, trusting R to fill things in appropriately might cause us problems later. It is usually better to err on the side of caution and think carefully about what each line is doing, using comments to help the readability. The example below makes everything a bit cleaner and clearer.
+
+```{r}
+total_years <- length(nhtemp); # Total years in the data set
+# Make vectors with an NA element for each year
+T_Celsius   <- rep(x = NA, times = total_years);
+Temp_ch     <- rep(x = NA, times = total_years);
+for(year in 1:total_years){ # For each year in the data set
+  # First calculate the temperature in degrees Celsius
+  T_Celsius[year] <- (5/9) * (nhtemp[year] - 32);
+  if(year > 1){ # Condition in which difference exists
+      Temp_ch[year] <- T_Celsius[year] - T_Celsius[year - 1];
+  } # Now T_Celsius[0] will not be attempted
+}
+print(T_Celsius);
+```
+
+The use of the `if` above is technically unnecessary, but it serves as a nice reminder that it only makes sense to take the difference between temperatures starting in year 2. Now with `T_Celsius` and `Temp_ch` calculated, we can make a nice table of years and temperature values and changes.
+
+```{r}
+years <- 1912:1971;
+dat   <- cbind(years, nhtemp, T_Celsius, Temp_ch);
+```
+
+```{r, echo = FALSE}
+library(knitr);
+kable(dat);
+```
+
+In the next section, I will move on to consider a more complicated example using nested for loops (i.e., a for loop inside of another for loop).
 
 
 <a name="whatelse">Additional resources</a>
