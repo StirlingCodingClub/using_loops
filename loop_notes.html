@@ -154,8 +154,8 @@ $(document).ready(function () {
 </ul>
 <p>It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of ‘multiplication’ before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.</p>
 </div>
-<div id="the-for-loop-in-r" class="section level1">
-<h1>The for loop in R</h1>
+<div id="the-for-loop-in-r-getting-started" class="section level1">
+<h1>The for loop in R: getting started</h1>
 <p>Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:</p>
 <pre class="r"><code>for(index in set_of_conditions){
   # Code that gets repeated for each condition
@@ -222,6 +222,82 @@ print(10);</code></pre>
 ## [1] 10</code></pre>
 <p>The above use of the long <code>value_to_be_printed</code> instead of the shorter <code>i</code> seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting <code>{</code> and ending <code>}</code> brackets becomes larger than can be viewed on your screen.</p>
 <p><strong>3. There is nothing special about <code>1:10</code></strong></p>
+<p>A lot of introductions to for loops in R will show the set of values to be iterated in this way, but there are equally acceptable ways to write it. For example, consider the below:</p>
+<pre class="r"><code>for(i in c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)){
+  print(i);
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>Or even the below, where I first define the set of values with its own variable named <code>the_set</code>:</p>
+<pre class="r"><code>the_set &lt;- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+for(i in the_set){
+  print(i);
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>The order of numbers <strong>does</strong> matter. For example, we could reverse the order in which numbers are printed by reversing the set of values:</p>
+<pre class="r"><code>for(i in 10:1){
+  print(i);
+}</code></pre>
+<pre><code>## [1] 10
+## [1] 9
+## [1] 8
+## [1] 7
+## [1] 6
+## [1] 5
+## [1] 4
+## [1] 3
+## [1] 2
+## [1] 1</code></pre>
+<p>We could even print off the numbers in a random order with the below:</p>
+<pre class="r"><code>random_vec &lt;- sample(x = 1:10, size = 10);
+for(i in random_vec){
+  print(i);
+}</code></pre>
+<pre><code>## [1] 4
+## [1] 7
+## [1] 10
+## [1] 5
+## [1] 2
+## [1] 9
+## [1] 1
+## [1] 3
+## [1] 8
+## [1] 6</code></pre>
+<p>It is unlikely that there would ever be a need to reverse the order of a set, and for most of the for loops that you write, the simple <code>1:N</code> format will usually be all that you need. The point is that you should not feel <em>constrained</em> to using this format when writing loops.</p>
+</div>
+<div id="the-for-loop-in-r-a-real-example" class="section level1">
+<h1>The for loop in R: a real example</h1>
+<p>The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In real coding, it is unlikely that you will use for loops to print off values, and much more likely that you will use for loops to repeat the same set of instructions for a set of values. As a real example, I will use use the <code>nhtemp</code> data set in R.</p>
+<pre class="r"><code>data(nhtemp); # Reads in the data set</code></pre>
+<p>The <code>nhtemp</code> data set is a vector with the mean annual temperature in degrees Fahrenheit in New Haven, Connecticut (USA), from 1912 to 1971.</p>
+<pre class="r"><code>print(nhtemp);</code></pre>
+<pre><code>## Time Series:
+## Start = 1912 
+## End = 1971 
+## Frequency = 1 
+##  [1] 49.9 52.3 49.4 51.1 49.4 47.9 49.8 50.9 49.3 51.9 50.8 49.6 49.3 50.6
+## [15] 48.4 50.7 50.9 50.6 51.5 52.8 51.8 51.1 49.8 50.2 50.4 51.6 51.8 50.9
+## [29] 48.8 51.7 51.0 50.6 51.7 51.5 52.1 51.3 51.0 54.0 51.4 52.7 53.1 54.6
+## [43] 52.0 52.0 50.9 52.6 50.2 52.6 51.6 51.9 50.5 50.9 51.7 51.4 51.7 50.8
+## [57] 51.9 51.8 51.9 53.0</code></pre>
+<p>In the above data, the first value 49.9 is therefore the mean temperature from 1912, and the last value 53 is the mean temperature from 1971. We can print these off by using the indices <code>nhtemp[1]</code> and <code>nhtemp[60]</code> (as there are <code>length(nhtemp)</code> = 60 temperature years in <code>nhtemp</code>).</p>
 </div>
 <div id="additional-resources" class="section level1">
 <h1><a name="whatelse">Additional resources</a></h1>

@@ -43,7 +43,7 @@ Below I will demonstrate how to use [for loops](https://en.wikipedia.org/wiki/Fo
 
 It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of 'multiplication' before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.
 
-The for loop in R
+The for loop in R: getting started
 ================================================================================
 
 Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:
@@ -112,6 +112,92 @@ for(value_to_be_printed in 1:10){
 The above use of the long `value_to_be_printed` instead of the shorter `i` seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting `{` and ending `}` brackets becomes larger than can be viewed on your screen.
 
 **3. There is nothing special about `1:10`**
+
+A lot of introductions to for loops in R will show the set of values to be iterated in this way, but there are equally acceptable ways to write it. For example, consider the below:
+
+```{r, eval = TRUE}
+for(i in c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)){
+  print(i);
+}
+```
+
+Or even the below, where I first define the set of values with its own variable named `the_set`:
+
+```{r, eval = TRUE}
+the_set <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+for(i in the_set){
+  print(i);
+}
+```
+
+The order of numbers **does** matter. For example, we could reverse the order in which numbers are printed by reversing the set of values:
+
+```{r, eval = TRUE}
+for(i in 10:1){
+  print(i);
+}
+```
+
+We could even print off the numbers in a random order with the below:
+
+```{r, eval = TRUE}
+random_vec <- sample(x = 1:10, size = 10);
+for(i in random_vec){
+  print(i);
+}
+```
+
+It is unlikely that there would ever be a need to reverse the order of a set, and for most of the for loops that you write, the simple `1:N` format will usually be all that you need. The point is that you should not feel *constrained* to using this format when writing loops.
+
+The for loop in R: a real example
+================================================================================
+
+The examples above were intended only to introduce the general idea of using for loops, and their specific syntax in R. In real coding, it is unlikely that you will use for loops to print off values, and much more likely that you will use for loops to repeat the same set of instructions for a set of values. As a real example, I will use use the `nhtemp` data set in R.
+
+```{r}
+data(nhtemp); # Reads in the data set
+```
+
+The `nhtemp` data set is a vector with the mean annual temperature in degrees Fahrenheit in [New Haven](https://www.google.com/maps/place/New+Haven,+CT,+USA/@40.5046762,-74.5979605,6.75z/data=!4m5!3m4!1s0x89e7d8443a8070e5:0xf6a354c659b264ed!8m2!3d41.308274!4d-72.9278835), Connecticut (USA), from 1912 to 1971.
+
+```{r}
+print(nhtemp);
+```
+
+In the above data, the first value `r nhtemp[1]` is therefore the mean temperature from 1912, and the last value `r nhtemp[60]` is the mean temperature from 1971. We can print these off by using the indices `nhtemp[1]` and `nhtemp[60]` (as there are `length(nhtemp)` = `r length(nhtemp)` temperature years in `nhtemp`).
+
+```{r}
+print(nhtemp[1]);
+print(nhtemp[60]);
+```
+
+Pretend for a moment that you want to use these data to analyse how the temperature in New Haven has changed over the years from 1912-1972. The first thing that you might want to do is to convert the temperatures given Fahrenheit to Celsius. The formula for conversion is as follows,
+
+$$T_{Celsius} = \frac{5}{9}(T_{Fahrenheit} - 32).$$
+
+To get $T_{Celsius}$, it is not actually necessary to use a for loop in R; you can actually do it with the following line of code:
+
+```{r}
+T_Celsius <- (5/9) * (nhtemp - 32);
+print(T_Celsius);
+```
+
+But if you know in advance that you will doing some more complex data manipulation later, in might make sense to start out doing the same with a loop instead. To use a loop, you can first define the vector `T_Celsius`, then apply the conversion for each value in `nhtemp`.
+
+```{r}
+T_Celsius <- NULL;
+for(year in 1:length(nhtemp)){
+  T_Celsius[year] <- (5/9) * (nhtemp[year] - 32);
+}
+```
+
+There are a few things to note here.
+
+- In the first line of the above, using the `rep` function, I have defined `T_Celsius` to be a null vector.
+- I have used the index `year` rather than `i` to make it easier to remember what I am looping over.
+- The loop goes from 1 to the length of `nhtemp` (`length(nhtemp)` = `r length(nhtemp)`). I could have instead just written `1:60`, but the above has the advantage that if the length of `nhtemp` changes for some reason, the loop will still work. As a exercise, try running the above code for `1:40` or `1:80` to see what happens when the number of years to loop over does not match the number of years in `nhtemp`.
+
+
 
 
 <a name="whatelse">Additional resources</a>
