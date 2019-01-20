@@ -16,6 +16,14 @@ Contents
 
 - [Introduction: What is a loop?](#what_is_loop)
 
+**Indices in loops**
+
+**For loops**
+
+**While loops**
+
+
+Infinite loop
 
 - [Additional resources](#whatelse)
 
@@ -24,14 +32,92 @@ Contents
 <a name="what_is_vc">Introduction: What is a loop?</a>
 ================================================================================
 
+Being able to use loops is a critical skill in programming and working with large arrays of data. Loops allow you to repeat a set of instructions (i.e., code) `for` a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or `while` a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of [for loops](https://en.wikipedia.org/wiki/For_loop) and [while loops](https://en.wikipedia.org/wiki/While_loop) are fundamental for writing and running code efficiently (note that [other types](https://en.wikipedia.org/wiki/Do_while_loop) of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.
 
+The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as [apply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply) and [tapply](https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply), which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable [packages](https://cran.r-project.org/) (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., [vegan](https://github.com/vegandevs/vegan), [dplyr](https://dplyr.tidyverse.org/), and [shiny](https://github.com/rstudio/shiny)). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will allow you to quickly and confidently develop reproducible code in your own data analysis, ultimately saving time while also further developing your own coding skills.
+
+Below I will demonstrate how to use [for loops](https://en.wikipedia.org/wiki/For_loop) and [while loops](https://en.wikipedia.org/wiki/While_loop).
+
+- A **for loop** iterates a set of instructions *for* a predetermined set of conditions (i.e., when you know how many times you need to iterate the same set of instructions)
+- A **while loop** iterates a set of instructions *while* some condition(s) remains satisfied (i.e., when you might not know how many times you need to iterate the same set of instructions, but you do know when the iterations need to stop)
+
+It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of 'multiplication' before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.
+
+The for loop in R
+================================================================================
+
+Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:
+
+```{r, eval = FALSE}
+for(index in set_of_conditions){
+  # Code that gets repeated for each condition
+}
+```
+
+In the above, anything within the bracketed `{` `}` gets repeated with `index` being substituted, sequentially, for all possible conditions `in` the `set_of_conditions`. A more concrete example will help:
+
+```{r, eval = FALSE}
+for(i in 1:10){
+  print(i);
+}
+```
+
+We can interpret the line `for(i in 1:10)` verbally to explain what is going on in plain English:
+
+> Substitute the index `i` for each value from 1 to 10 (i.e., 1, 2, 3, ..., 8, 9, 10), then run the following bracketed code in sequence. In other words, run the bracketed code first with `i = 1`, then with `i = 2`, and so forth until finishing the loop with `i = 10`. 
+
+Given the above explanation, we can predict what will happen with the example code above, which I now run below.
+
+```{r, eval = TRUE}
+for(i in 1:10){
+  print(i);
+}
+```
+
+The code has printed integers from 1 to 10. This is obviously a very simple example of using a loop, but it highlights the basic idea. **There are three key points that I want to note with this example before moving on**
+
+**1. the above for loop is effectively doing the same as the code below**
+
+```{r, eval = FALSE}
+print(1);
+print(2);
+print(3);
+print(4);
+print(5);
+print(6);
+print(7);
+print(8);
+print(9);
+print(10);
+```
+
+```{r, eval = TRUE, echo = FALSE}
+for(i in 1:10){
+  print(i);
+}
+```
+
+In the above, I have [unrolled](https://en.wikipedia.org/wiki/Loop_unrolling) the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat code more times than necessary (consider if you decided you wanted to print values from 1 to 10000 -- much less needs to be changed when using the for loop, and much less code needs to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what your loops would look like if unrolled -- or even write them both ways to convince yourself that the loop is doing what you intend it to do.
+
+**2. There is nothing special about `i`**
+
+In a lot of books and online examples introducing loops, the index `i` is used as it is in my above example. But there is nothing special about `i`, just as there is nothing special about the variable `x` in algebra. The index `i` just serves as a placeholder for whatever actual value is going to be substituted from the set of conditions (i.e., values from 1 to 10 in the above example). We get the exact same result with the following code:
+
+```{r, eval = TRUE}
+for(value_to_be_printed in 1:10){
+  print(value_to_be_printed);
+}
+```
+
+The above use of the long `value_to_be_printed` instead of the shorter `i` seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting `{` and ending `}` brackets becomes larger than can be viewed on your screen.
+
+**3. There is nothing special about `1:10`**
 
 
 <a name="whatelse">Additional resources</a>
 ================================================================================
 
-
-
+- The [Essence of Loops](https://www.i-programmer.info/programming/theory/8003-the-essence-of-loops.html)
 
 
 

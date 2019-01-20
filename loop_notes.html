@@ -132,16 +132,102 @@ $(document).ready(function () {
 <p><strong>Note: Please think of this document as a living document, which you are free to improve (like a <a href="https://en.wikipedia.org/wiki/Wiki">wiki</a>) with minor edits, new sections that others might find useful, or <a href="#whatelse">additional resources</a> that you find that you think others might also find useful. After reading through this, you should have a working understanding of what a loop is and how to use it in your own coding.</strong></p>
 <hr />
 <ul>
-<li><p><a href="#what_is_loop">Introduction: What is a loop?</a></p></li>
-<li><p><a href="#whatelse">Additional resources</a></p></li>
+<li><a href="#what_is_loop">Introduction: What is a loop?</a></li>
+</ul>
+<p><strong>Indices in loops</strong></p>
+<p><strong>For loops</strong></p>
+<p><strong>While loops</strong></p>
+<p>Infinite loop</p>
+<ul>
+<li><a href="#whatelse">Additional resources</a></li>
 </ul>
 <hr />
 </div>
 <div id="introduction-what-is-a-loop" class="section level1">
 <h1><a name="what_is_vc">Introduction: What is a loop?</a></h1>
+<p>Being able to use loops is a critical skill in programming and working with large arrays of data. Loops allow you to repeat a set of instructions (i.e., code) <code>for</code> a particular set of conditions (e.g., for a range of numbers from 1 to 1000), or <code>while</code> a set of conditions still applies (e.g., while a value is still greater than zero). Hence, the use of <a href="https://en.wikipedia.org/wiki/For_loop">for loops</a> and <a href="https://en.wikipedia.org/wiki/While_loop">while loops</a> are fundamental for writing and running code efficiently (note that <a href="https://en.wikipedia.org/wiki/Do_while_loop">other types</a> of loops also exist, but I will not focus on them now). Here I will introduce the key concepts of programming with loops, with particular emphasis on getting started with some practical uses of loops in the R programming language for scientific researchers.</p>
+<p>The R programming language includes many base level functions to perform tasks that would otherwise require loops (e.g., functions such as <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/apply">apply</a> and <a href="https://www.rdocumentation.org/packages/base/versions/3.5.2/topics/tapply">tapply</a>, which effectively repeat a set of instructions to summarise values in an array). Tens of thousands of downloadable <a href="https://cran.r-project.org/">packages</a> (code, data, and documentation bundled together, written by and for R users) are available in R, most of which include their own functions that can perform specific tasks required in scientific research (e.g., <a href="https://github.com/vegandevs/vegan">vegan</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a>, and <a href="https://github.com/rstudio/shiny">shiny</a>). Hence, successful data analysis in R can often just be a matter of finding and using an appropriate and reliable package for a given task. Nevertheless, unique data sets and models often require unique code, so base and package functions cannot always be found to do custom tasks. In many situations, the ability to use loops to repeat tasks will allow you to quickly and confidently develop reproducible code in your own data analysis, ultimately saving time while also further developing your own coding skills.</p>
+<p>Below I will demonstrate how to use <a href="https://en.wikipedia.org/wiki/For_loop">for loops</a> and <a href="https://en.wikipedia.org/wiki/While_loop">while loops</a>.</p>
+<ul>
+<li>A <strong>for loop</strong> iterates a set of instructions <em>for</em> a predetermined set of conditions (i.e., when you know how many times you need to iterate the same set of instructions)</li>
+<li>A <strong>while loop</strong> iterates a set of instructions <em>while</em> some condition(s) remains satisfied (i.e., when you might not know how many times you need to iterate the same set of instructions, but you do know when the iterations need to stop)</li>
+</ul>
+<p>It is not important to completely understand the two definitions above before getting started, just as it is not important to understand a verbal definition of ‘multiplication’ before learning to multiply two numbers. Rather, seeing examples of how to use each of these loops will help you develop an intuition for using them in writing your own code. In the next section, I will therefore start with some key examples to show how for loops can be used in R. I will then do the same with while loops. Finally, I will provide some practice problems and additional resources for using loops in programming.</p>
+</div>
+<div id="the-for-loop-in-r" class="section level1">
+<h1>The for loop in R</h1>
+<p>Different languages have differ syntaxes for writing for loops. In R, the syntax is as follows:</p>
+<pre class="r"><code>for(index in set_of_conditions){
+  # Code that gets repeated for each condition
+}</code></pre>
+<p>In the above, anything within the bracketed <code>{</code> <code>}</code> gets repeated with <code>index</code> being substituted, sequentially, for all possible conditions <code>in</code> the <code>set_of_conditions</code>. A more concrete example will help:</p>
+<pre class="r"><code>for(i in 1:10){
+  print(i);
+}</code></pre>
+<p>We can interpret the line <code>for(i in 1:10)</code> verbally to explain what is going on in plain English:</p>
+<blockquote>
+<p>Substitute the index <code>i</code> for each value from 1 to 10 (i.e., 1, 2, 3, …, 8, 9, 10), then run the following bracketed code in sequence. In other words, run the bracketed code first with <code>i = 1</code>, then with <code>i = 2</code>, and so forth until finishing the loop with <code>i = 10</code>.</p>
+</blockquote>
+<p>Given the above explanation, we can predict what will happen with the example code above, which I now run below.</p>
+<pre class="r"><code>for(i in 1:10){
+  print(i);
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>The code has printed integers from 1 to 10. This is obviously a very simple example of using a loop, but it highlights the basic idea. <strong>There are three key points that I want to note with this example before moving on</strong></p>
+<p><strong>1. the above for loop is effectively doing the same as the code below</strong></p>
+<pre class="r"><code>print(1);
+print(2);
+print(3);
+print(4);
+print(5);
+print(6);
+print(7);
+print(8);
+print(9);
+print(10);</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>In the above, I have <a href="https://en.wikipedia.org/wiki/Loop_unrolling">unrolled</a> the for loop that printed off integers from 1 to 10. But the result is the same. The advantage of using the loop is that it avoids the need to repeat code more times than necessary (consider if you decided you wanted to print values from 1 to 10000 – much less needs to be changed when using the for loop, and much less code needs to be written). There is no hard rule for when to use a loop versus when to repeat the same line(s) of code multiple times; it is generally best to use whichever method is most readable to (future) you. In practice, when getting started, it might help to think about what your loops would look like if unrolled – or even write them both ways to convince yourself that the loop is doing what you intend it to do.</p>
+<p><strong>2. There is nothing special about <code>i</code></strong></p>
+<p>In a lot of books and online examples introducing loops, the index <code>i</code> is used as it is in my above example. But there is nothing special about <code>i</code>, just as there is nothing special about the variable <code>x</code> in algebra. The index <code>i</code> just serves as a placeholder for whatever actual value is going to be substituted from the set of conditions (i.e., values from 1 to 10 in the above example). We get the exact same result with the following code:</p>
+<pre class="r"><code>for(value_to_be_printed in 1:10){
+  print(value_to_be_printed);
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>The above use of the long <code>value_to_be_printed</code> instead of the shorter <code>i</code> seems unnecessary at first, but it is actually often helpful to give indices specific names like this to make code more readable. Doing so becomes especially helpful when working with multiple indices and loops within loops (an example of this later), or when the number of lines between the starting <code>{</code> and ending <code>}</code> brackets becomes larger than can be viewed on your screen.</p>
+<p><strong>3. There is nothing special about <code>1:10</code></strong></p>
 </div>
 <div id="additional-resources" class="section level1">
 <h1><a name="whatelse">Additional resources</a></h1>
+<ul>
+<li>The <a href="https://www.i-programmer.info/programming/theory/8003-the-essence-of-loops.html">Essence of Loops</a></li>
+</ul>
 </div>
 
 
