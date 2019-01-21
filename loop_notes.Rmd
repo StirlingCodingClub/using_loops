@@ -291,6 +291,46 @@ Once the logic of the nested loop makes sense, the rest comes down to rememberin
 <a name="while_loop">The while loop in R</a>
 ================================================================================
 
+The general idea of a `while loop` is the same as that of a `for loop`. In both cases, we are repeating the same task multiple times. But whereas we could specify the full range of values `in` which to substitute some value (e.g., `i`) within a `for` loop, in a `while` loop, we only specify the conditions under which to continue iterating. The printing of numbers from 1 to 10, as done with the `for` loop above, can also be done with the `while` loop below. 
+
+```{r}
+i <- 1;
+while(i <= 10){
+    print(i);
+    i <- i + 1;
+}
+```
+
+There are few important things to note. 
+
+1. We need to specify an initial value of `i = 1` (else `print(i)` will not return anything).
+2. The loop will continue as long as `i` is less than or equal to 10 (`while(i <= 10)`).
+3. It is critical to increment `i` within the loop (i.e., add a value of 1 at the end so `i <- i + 1`).
+
+If we had forgotten number 3, then the value of `i` would always be 1. Aside from only printing the number 1 many times (rather than 1-10), notice that the loop would never actually terminate because `i` would *always* stay less than or equal to 10. This situation is called an '[infinite loop](https://en.wikipedia.org/wiki/Infinite_loop)', and will result in a situation where it is necessary to terminate the loop manually (i.e., tell R to stop it, either using the red stop sign in the Rstudio console, or by holding down 'CTRL + C'). This is almost always to be avoided, but to see what happens, remove the line `i <- i + 1;` and run the rest of code above.
+
+Sometimes the use of `for` versus `while` loops is a matter of personal preference, such as with the simple example of printing a set of numbers from 1 to 10. In some cases, however, use of a `while` loop will make coding easier. 
+
+Consider a situation in which data need to be randomly sampled from a subset of 100 out of 1000 total different entities (the details do not matter -- these entities could be different lochs, fields, or trees in a park). If we just need to sample 100 values out of 1000 without replacement, we can do this with a single line of R code:
+
+```{r}
+subset <- sample(x = 1:1000, size = 100, replace = FALSE);
+print(subset);
+```
+
+This is easy enough, but what if, having already chosen these 100 entities, we decide that we need *another* 100, for a total of 200 unique samples (without replacement). We could find a creative way of using `sample` again in R (give this a try), but there is a logical way to do this with a `while` loop. The idea is to sample a single value from `1:1000`, then check to see if that value is already in the `subset`. If it is in the `subset`, then throw it out and keep going. If it is not in the `subset`, add it. Continue until the size of `subset` is 200.
+
+```{r}
+while(length(subset) <= 200){
+    samp <- sample(x = 1:1000, size = 1);
+    if(samp %in% subset == FALSE){
+        subset <- c(subset, samp);
+    }
+}
+print(subset);
+```
+
+The `while` loop above will continue as long as `subset` contains less than 200 numbers. If a randomly selected number from 1 to 1000 is **not** in the `subset`, then it is immediately added to make a bigger `subset` with the new number appended to it. The end result is that the above code has added 100 new unique values to the previous sample of 100.
 
 
 <a name="whatelse">Additional resources</a>
