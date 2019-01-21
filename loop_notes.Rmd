@@ -3,6 +3,7 @@ title: "Using loops in coding"
 author: "Brad Duthie"
 date: "23 January 2019"
 output: html_document
+bibliography: loop_notes.bib
 ---
 
 Contents
@@ -244,6 +245,24 @@ kable(dat);
 ```
 
 In the next section, I will move on to consider a more complicated example using nested for loops (i.e., a for loop inside of another for loop).
+
+<a name="for_more">The for loop in R: nested loops</a>
+================================================================================
+
+Loops can be nested inside one another, such that the inner loop is run one time for each iteration of the outer loop. A common example of when nested loops are useful is in working with two dimensional arrays (e.g., tables or matrices). I will share a quick example from community ecology theory, in which species interactions within a community are often represented by square matrices like the one below,
+
+$$M = 
+\begin{bmatrix}
+    -1       & -0.2 \\
+    -0.3     & -1 
+\end{bmatrix}.$$
+
+Community ecology theory is not the focus here, so it is fine to [skip a couple paragraphs](#skip) to just move along to the coding problem. For more context though, each element in the above matrix defines how a slight increase in the density of one species affects the density of another species when species densities are at some equilibrium state. Each row and column in $M$ represents a single species, so there are two species in the above matrix. Where rows and column numbers are identical, we have the diagonal of the matrix; this defines how a species affects its own density (i.e., self-regulation). The off-diagonals define how a slight increase in one species' density affects a different species; in the above example, both species decrease each others densities because each has a negative affect on each other (the species in row 1 is negatively affected by species 2 by a magnitude of $M_{1,2} = -0.2$, and the species in row 2 is negatively affected by species 1 by a magnitude of $M_{2,1} =-0.3$). 
+
+
+[@Allesina2015a, @Allesina2012]
+
+<a name = "skip">The coding issue that needs to be addressed is to build matrices with the desired properties.
 
 
 <a name="whatelse">Additional resources</a>
