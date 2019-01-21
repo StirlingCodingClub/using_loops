@@ -18,16 +18,8 @@ Contents
 - [Introduction: What is a loop?](#what_is_loop)
 - [The for loop in R: getting started](#for_gs)
 - [The for loop in R: a real example](#for_re)
-
-**Indices in loops**
-
-**For loops**
-
-**While loops**
-
-
-Infinite loop
-
+- [The for loop in R: nested loops](#for_more)
+- [The while loop in R](#while_loop)
 - [Additional resources](#whatelse)
 
 ********************************************************************************
@@ -257,12 +249,48 @@ $$M =
     -0.3     & -1 
 \end{bmatrix}.$$
 
-Community ecology theory is not the focus here, so it is fine to [skip a couple paragraphs](#skip) to just move along to the coding problem. For more context though, each element in the above matrix defines how a slight increase in the density of one species affects the density of another species when species densities are at some equilibrium state. Each row and column in $M$ represents a single species, so there are two species in the above matrix. Where rows and column numbers are identical, we have the diagonal of the matrix; this defines how a species affects its own density (i.e., self-regulation). The off-diagonals define how a slight increase in one species' density affects a different species; in the above example, both species decrease each others densities because each has a negative affect on each other (the species in row 1 is negatively affected by species 2 by a magnitude of $M_{1,2} = -0.2$, and the species in row 2 is negatively affected by species 1 by a magnitude of $M_{2,1} =-0.3$). 
+Community ecology theory is not the focus here, so it is fine to [skip a couple paragraphs](#skip) to just move along to the coding problem. For more context though, each element in the above matrix defines how a slight increase in the density of one species affects the density of another species when species densities are at some equilibrium state. Each row and column in $M$ represents a single species, so there are two species in the above matrix. Where rows and column numbers are identical, we have the diagonal of the matrix; this defines how a species affects its own density (i.e., self-regulation). The off-diagonals define how a slight increase in one species' density affects a different species; in the above example, both species decrease each others densities because each has a negative affect on the other (the species in row 1 is negatively affected by species 2 by a magnitude of $M_{1,2} = -0.2$, and the species in row 2 is negatively affected by species 1 by a magnitude of $M_{2,1} =-0.3$). If one of these two off-diagonal elements were positive and the other were negative (e.g., $M_{1,2} = 0.2$, $M_{2,1} = -0.3$), we could interpret this as a predator-prey interaction. If both off-diagonal elements were positive (e.g., $M_{1,2} = 0.2$, $M_{2,1} = 0.3$), we could interpret this as a mutualistic interaction.
 
+To investigate community stability, theoreticians use random matrix theory to test how likely it is that communities with specific properties will return to equilibrium species densities when perturbed [e.g., @Allesina2015a; @Allesina2012]. Developing this theory sometimes requires generating many large $M$ matrices with random interaction strengths (off-diagonal elements) but uniform interaction types (competitor, predator-prey, or mutualist) and self-regulation (diagonal elements). If we take the case of large $M$ matrices in which all interactions are predator-prey (e.g., a big food web), all pairs of row-column elements need to have opposite signs. In other words, if $M_{i,j}$ is positive, then $M_{j,i}$ needs to be negative. To generate a random matrix with this property, we need go through the elements of $M$ and change the signs of values where appropriate.
 
-[@Allesina2015a, @Allesina2012]
+<a name = "skip">The **coding** issue</a> is therefore to build a large matrix in which the sign of $M_{i,j}$ is the opposite of $M_{j,i}$. We also want the absolute values of the off-diagonal elements to be random numbers, and the diagonal elements to be -1. These latter two properties can be made with the following lines of code, which will make a $10 \times 10$ matrix as printed off below:
 
-<a name = "skip">The coding issue that needs to be addressed is to build matrices with the desired properties.
+```{r}
+M_vals <- rnorm(n = 100, mean = 0, sd = 1);
+M_vals <- round(M_vals, digits = 2);
+M_mat  <- matrix(data = M_vals, nrow = 10);
+diag(M_mat) <- -1; # Adds -1 values to diagonal
+print(M_mat);
+```
+
+The above random matrix has diagonal elements all equal to $-1$, and off-diagonal elements independently drawn from a standard normal distribution $\mathcal{N}(0, 1)$. **The task is now to to make sure that pairs of off-diagonal elements $M_{i, j}$ and $M_{j, i}$ have opposite signs**. In other words, if `M_mat[1, 3]` is positive, then `M_mat[3, 1]` should be negative (recall that R indices in brackets refer first to the row, then the column of a matrix: `M_mat[row, column]`). Unlike the previous problems in these notes, it is difficult to see how to create such a matrix without using loops (or editing the values by hand). We need to iterate over `M_mat` `for` each row and `for` each column, reversing the signs of off-diagonal elements whenever necessary. To do this, we can use a `for` loop within another `for` loop -- the outer loop iterates over rows, and the inner loop iterates over columns. Whenever a pair of elements `M_mat[i, j]` and `M_mat[j, i]` are found to have the same sign, `M_mat[i, j]` is multiplied by -1.
+
+```{r}
+N_species <- dim(M_mat)[1]; # Get total row & col number
+for(i in 1:N_species){ # For each row in the matrix
+    for(j in 1:N_species){ # For each column in the row
+        if(i < j){ # Only need to look at upper triangle
+            elem_sign <- M_mat[i, j] * M_mat[j, i];
+            if(elem_sign > 0){
+                M_mat[i, j] <- -1 * M_mat[i, j];
+            }
+        }
+    } # Finish all columns in the row
+} # Finish all rows
+print(M_mat);
+```
+
+Note that in the matrix `M_mat` modified above, all pairs of off-diagonal elements `M_mat[i, j]` and `M_mat[j, i]` have opposite signs. Why did that work? We can start with the loops, the outer of which (`for(i in 1:N_species)`) started going through rows starting with row `i = 1`. While `i = 1`, the inner loop (`for(j in 1:N_species)`) went through all columns from 1 to 10 in row 1. Each unique combination of row `i` and column `j` identified a unique matrix element `M_mat[i, j]`, and the code then checked to see if any action needed to be taken in two ways. First, the code checked to see `if(i < j)` -- if not, then the whole bracketed `if` statement is skipped and we move on to the next column `j`. This `if` statement prevents the code from unnecessarily checking the same `i` and `j` pair twice, and prevents it from changing the diagonal where `i == j`. Second, the code assigning `elem_sign` checks to see if `M_mat[i, j]` and `M_mat[j, i]` have opposing signs by multiplying the two values together (two positives or two negatives multiplied together will equal a positive value for `elem_sign`; one positive and one negative will equal a negative value). If `elem_sign > 0`, then we know that `M_mat[i, j]` and `M_mat[j, i]` are either both positive or both negative, so we fix this by changing the sign of `M_mat[i, j]` (multiplying by -1). The figure below gives a visual representation of what is happening.
+
+![](images/nested_loops.png)
+
+In the figure above, we start with the case in which `i = 1` (i.e., the first row), and move through each value of `j` from `j = 1` to `j = 10`. If `M_mat[i, j]` is in the upper right triangle of the matrix (i.e., `i < j`; shown in red), then the code checks to see if both `M_mat[i, j]` and `M_mat[j, i]` have the same sign. The loop ends when it has moved through all values of `i` from 1 to 10, hence looking at each element `M_mat[i, j]` in the matrix. 
+
+Once the logic of the nested loop makes sense, the rest comes down to remembering the syntax for for coding loops in R correctly. This comes with practice, so I have included some practice problems using loops below. Next, I will have a (briefer) look at the `while` loop in R. The general idea of iterating the same task many times will be the same, but the conditions under which the task is iterated will change slightly.
+
+<a name="while_loop">The while loop in R</a>
+================================================================================
+
 
 
 <a name="whatelse">Additional resources</a>
@@ -271,4 +299,6 @@ Community ecology theory is not the focus here, so it is fine to [skip a couple 
 - The [Essence of Loops](https://www.i-programmer.info/programming/theory/8003-the-essence-of-loops.html)
 
 
+References
+================================================================================
 
