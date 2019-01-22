@@ -3,62 +3,65 @@ title: "Using loops in R"
 author: "Brad Duthie"
 date: "23 January 2019"
 output:
-  ioslides_presentation: 
-    logo: images/SCC_Logo_slide_sm.png
+  beamer_presentation:
+    theme: "default"
+    colortheme: "default"
+    fonttheme: "default"
+  ioslides_presentation: default
+  slidy_presentation: default
+header-includes:
+- \usepackage{hyperref}
+colorlinks: true
+linkcolor: blue
+urlcolor: blue
 ---
 
 
-<style type="text/css">
-body p {
-  color: #000000;
-}
-ul {
-  color: black;
-}
-ol {
-  color: black;
-}
-a {
-    color: darkblue;
-    text-decoration: none
-}
-.fifty {
-   font-size: 50%;
-   }
-.seventy {
-   font-size: 70%;
-   }
-slides > slide.backdrop {
-  background: none !important;
-  background-color: white !important;
-}
-slides > slide.title-slide hgroup h1 {
-  color: black;
-}
-slides > slide.title-slide p {
-  color: black;
-}
-slides > slide.light > hgroup h2 {
-  color: black;
-}
-slides > slide.light > hgroup h1 {
-  color: black;
-}
-ul {
-  color: black;
-}
-ol {
-  color: black;
-}
-p {
-  color: black
-}
-h1, h2, h3, h4, h5, h6, h7, h8, p {
-    color: black;
-}
-</style>
-
 ## What is a loop?
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+
+\textbf{A loop repeats the same set of instructions (i.e., `code') across a particular set of conditions}
+\newline
+
+\pause
+
+Suppose you want to print the following sequence:
+\newline
+
+$1$, $\frac{1}{2}$, $3$, $\frac{1}{4}$, $\dots$, $999$,  $\frac{1}{1000}$
+\newline
+
+\pause
+
+How would you do it in R (without a loop)?
+
+\pause
+
+\end{column}
+\begin{column}{0.5\textwidth} 
+How would you explain what you want to do (verbally)?
+\pause
+\newline
+\begin{enumerate}
+  \item For each integer from 1 to 1000
+  \item If the number is odd, print it
+  \item If the number is even, divide by the number then print it
+  \item Stop when when finished printing
+\end{enumerate}
+\end{column}
+\end{columns}
+
+
+
+
+
+
+
+
+
+
 
 
 
