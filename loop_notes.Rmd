@@ -357,7 +357,7 @@ for(i in 1:1000){
 </details>
 
 
-2. In the `nhtemp`, write a loop to add up the temperatures *for all of the even numbered years*, the divide by the total number of even numbered years to get the average.
+2. In the `nhtemp`, write a loop to add up the temperatures *for all of the even numbered years*, then divide by the total number of even numbered years to get the average.
 
 <details>
 
