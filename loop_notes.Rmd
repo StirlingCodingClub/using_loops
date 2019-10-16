@@ -205,10 +205,10 @@ for(year in 1:length(nhtemp)){
   T_Celsius[year] <- (5/9) * (nhtemp[year] - 32);
   Temp_ch[year]   <- T_Celsius[year] - T_Celsius[year - 1];
 }
-print(T_Celsius);
+print(Temp_ch);
 ```
 
-In the new line of code added within the above loop, the temperature in degrees Celsius from the previous year `T_Celsius[year - 1]` is subtracted from the tempurature from the current year `T_Celsius[year]`. The value of this difference is then stored in `Temp_ch[year]`, so at the end of the loop, each element of `Temp_ch` stores the difference between the current year's temperature and the last year's temperature.
+In the new line of code added within the above loop, the temperature in degrees Celsius from the previous year `T_Celsius[year - 1]` is subtracted from the temperature from the current year `T_Celsius[year]`. The value of this difference is then stored in `Temp_ch[year]`, so at the end of the loop, each element of `Temp_ch` stores the difference between the current year's temperature and the last year's temperature.
 
 Note that this newly added line within the for loop is a bit dangerous because `T_Celsius[year - 1]` does not exist when `year = 1` (i.e., at the start of the loop). Since there is no value at `T_Celsius[1 - 1]`, R returns an `NA`, so the first value of `Temp_ch = NA`. This is what we want, but if we are not careful, trusting R to fill things in appropriately might cause us problems later. It is usually better to err on the side of caution and think carefully about what each line is doing, using comments to help the readability. The example below makes everything a bit cleaner and clearer.
 
@@ -224,7 +224,7 @@ for(year in 1:total_years){ # For each year in the data set
       Temp_ch[year] <- T_Celsius[year] - T_Celsius[year - 1];
   } # Now T_Celsius[0] will not be attempted
 }
-print(T_Celsius);
+print(Temp_ch);
 ```
 
 The use of the `if` above is technically unnecessary, but it serves as a nice reminder that it only makes sense to take the difference between temperatures starting in year 2. Now with `T_Celsius` and `Temp_ch` calculated, we can make a nice table of years and temperature values and changes.
