@@ -1,7 +1,8 @@
 ---
 title: "Using loops in R"
 author: "Stirling Coding Club"
-date: "23 January 2019"
+subtitle: stirlingcodingclub.github.io/using_loops/loop_notes.html
+date: "16 October 2019"
 output:
   beamer_presentation:
     theme: "default"
