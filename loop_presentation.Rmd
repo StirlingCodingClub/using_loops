@@ -2,7 +2,7 @@
 title: "Using loops in R"
 author: "Stirling Coding Club"
 subtitle: stirlingcodingclub.github.io/using_loops/loop_notes.html
-date: "19 August 2020"
+date: "17 November 2021"
 output:
   beamer_presentation:
     theme: "default"
@@ -25,21 +25,14 @@ urlcolor: blue
 
 \textbf{A loop repeats the same set of instructions (i.e., `code') across a particular set of conditions}
 \newline
-
 \pause
-
 Suppose you want to print the following sequence:
 \newline
-
 $1$, $\frac{1}{2}$, $3$, $\frac{1}{4}$, $\dots$, $999$,  $\frac{1}{1000}$
 \newline
-
 \pause
-
 How would you do it in R (without a loop)?
-
 \pause
-
 \end{column}
 \begin{column}{0.5\textwidth} 
 How would you explain what you want to do (verbally)?
@@ -53,13 +46,9 @@ How would you explain what you want to do (verbally)?
 \end{enumerate}
 \end{column}
 \end{columns}
-
-
 ## What is a loop?
-
 \begin{columns}
 \begin{column}{0.5\textwidth}
-
 \textbf{A loop repeats the same set of instructions (i.e., `code') across a particular set of conditions}
 \newline
 
@@ -121,7 +110,6 @@ for(x in 1:1000){         # The loop starts here
 for(x in 1:1000){         # The loop starts here
     
     is_odd <- TRUE;       # First assume'x' is odd
-
     if(x %% 2 == 0){      # If 'x' is not odd
         is_odd <- FALSE;  # Set to false
     }                     # Now know if 'x' is odd
@@ -139,10 +127,8 @@ for(x in 1:1000){         # The loop starts here
 
 ```{r, eval = FALSE}
 data(mtcars) # Read in R table of data about cars
-
 rows <- dim(mtcars)[1]; # Get total mtcars rows
 cols <- dim(mtcars)[2]; # Get total mtcars columns
-
 for(i in 1:rows){            # for each row
     for(j in 1:cols){        # for each column
         print(mtcars[i, j]); # print the value
@@ -162,7 +148,6 @@ for(i in 1:rows){            # for each row
 
 ```{r, eval = FALSE}
 counter <- 200; # Set a counter outside the loop
-
 while(counter > 0){ # Keep looping while counter > 0
     
     print(counter); 
@@ -170,7 +155,6 @@ while(counter > 0){ # Keep looping while counter > 0
     counter <- counter - 1; # Avoid infinite loop
     
 } # The loop ends here
-
 ```
 
 
@@ -196,8 +180,5 @@ https://stirlingcodingclub.github.io/using_loops/loop_notes.html
 5. Create an $8 \times 8$ matrix `mat` with diagonal values of 1 and off-diagonal selected from $\mathcal{N}(0, 1)$. Swap elements `mat[i, j]` with `mat[j, i]` **only** if `mat[i, j] < mat[j, i]`
 
 https://stirlingcodingclub.github.io/using_loops/loop_notes.html
-
-
-
 
 
