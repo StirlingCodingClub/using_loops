@@ -1,8 +1,8 @@
 ---
 title: "Using loops in R"
 author: "Stirling Coding Club"
-subtitle: stirlingcodingclub.github.io/using_loops/loop_notes.html
-date: "17 November 2021"
+subtitle: https://stirlingcodingclub.github.io/using_loops
+date: "31 January 2024"
 output:
   beamer_presentation:
     theme: "default"
@@ -160,11 +160,11 @@ while(counter > 0){ # Keep looping while counter > 0
 
 ## Guided with with using_loop notes
 
-- **Feel free now to work through the [guided notes](https://stirlingcodingclub.github.io/using_loops/loop_notes.html) on using loops, or to practice using loops with your own code** \newline
+- **Feel free now to work through the [guided notes](https://stirlingcodingclub.github.io/using_loops) on using loops, or to practice using loops with your own code** \newline
 
 - **Notes include five practice problems, with suggested answers, to get started** \newline \newline \newline \newline \newline \newline \newline \newline
 
-https://stirlingcodingclub.github.io/using_loops/loop_notes.html
+https://stirlingcodingclub.github.io/using_loops
 
 
 ## Practice problems {.smaller}
@@ -179,6 +179,6 @@ https://stirlingcodingclub.github.io/using_loops/loop_notes.html
 
 5. Create an $8 \times 8$ matrix `mat` with diagonal values of 1 and off-diagonal selected from $\mathcal{N}(0, 1)$. Swap elements `mat[i, j]` with `mat[j, i]` **only** if `mat[i, j] < mat[j, i]`
 
-https://stirlingcodingclub.github.io/using_loops/loop_notes.html
+https://stirlingcodingclub.github.io/using_loops
 
 
