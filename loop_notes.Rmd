@@ -1,11 +1,11 @@
 ---
 title: "Using loops in coding"
 author: "Brad Duthie"
-date: "17 November 2021"
+date: "21 January 2026"
 output:
-  pdf_document: default
   html_document:
     code_folding: show
+  pdf_document: default
 bibliography: loop_notes.bib
 ---
 

@@ -2,7 +2,7 @@
 title: "Using loops in R"
 author: "Stirling Coding Club"
 subtitle: https://stirlingcodingclub.github.io/using_loops
-date: "31 January 2024"
+date: "28 January 2025"
 output:
   beamer_presentation:
     theme: "default"
